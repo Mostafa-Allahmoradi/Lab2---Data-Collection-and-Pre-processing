@@ -37,7 +37,7 @@ class DBManager:
     # Creates a table in the database (if it doesn’t already exist).
     def _drop_and_create_table(self):
         """Drop and recreate the table from scratch."""
-        drop_query = f"DROP TABLE IF EXISTS {self.table_name};"
+        drop_query = f"DROP TABLE IF EXISTS \"{self.table_name}\";"
 
         column_defs = [(col, map_dtype(dtype)) for col, dtype in self.data.dtypes.items() ]
         create_query = sql.SQL("CREATE TABLE IF NOT EXISTS {table} ({fields})").format(
@@ -67,7 +67,7 @@ class DBManager:
 
     def _fect_all(self):
         # print("🔍 Fetching all records from the database...")
-        sql_query = f"SELECT * FROM \"Shipping_Addresses\";"
+        sql_query = f"SELECT * FROM \"{self.table_name}\";"
 
         # Fetches all records from the database.
         with self.connection as conn:
